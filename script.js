@@ -1,58 +1,132 @@
-// Logic to play the game
-function playGame() {
-    
-    // Logic to get the computer choice
-    function getComputerChoice() {
-        let numberChoice = Math.floor(Math.random() * 3);
-        if (numberChoice === 0) {
-            return "rock"
-        } else if (numberChoice === 1) {
-            return "paper"
-        } else if (numberChoice === 2) {
-            return "scissor"
-        }
+// Logic to get the computer choice
+function getComputerChoice() {
+    let numberChoice = Math.floor(Math.random() * 3);
+    if (numberChoice === 0) {
+        return "rock"
+    } else if (numberChoice === 1) {
+        return "paper"
+    } else if (numberChoice === 2) {
+        return "scissor"
     }
-
-    // Logic to get the human choice
-    // function getHumanChoice() {
-    //     return prompt("Choose rock/paper/scissor: ");
-    // }
-
-    // Declare the players score variables 
-    let humanScore = 0;
-    let computerScore = 0;
-
-    // Create button variable
-    let btn = document.querySelector('.btn');
-
-    // Add event listener to the button variable
-    btn.addEventListener('click', playRound);
-
-    // Logic to play a single round
-    function playRound(humanChoice, computerChoice) {
-        if (humanChoice.toLowerCase() === "rock" && computerChoice === "scissor") {
-            humanScore++;
-            console.log(`You win! Rock beats scissor! Score: Human ${humanScore} x Computer ${computerScore}!`);
-        } else if (humanChoice.toLowerCase() === "rock" && computerChoice === "paper") {
-            computerScore++;
-            console.log(`You lose! Paper beats rock! Score: Human ${humanScore} x Computer ${computerScore}!`);
-        } else if (humanChoice.toLowerCase() === "paper" && computerChoice === "scissor") {
-            computerScore++;
-            console.log(`You lose! Scissor beats paper! Score: Human ${humanScore} x Computer ${computerScore}!`);
-        } else if (humanChoice.toLowerCase() === "paper" && computerChoice === "rock") {
-            humanScore++;
-            console.log(`You win! Paper beats rock! Score: Human ${humanScore} x Computer ${computerScore}!`);
-        } else if (humanChoice.toLowerCase() === "scissor" && computerChoice === "rock") {
-            computerScore++;
-            console.log(`You lose! Rock beats scissor! Score: Human ${humanScore} x Computer ${computerScore}!`);
-        } else if (humanChoice.toLowerCase() === "scissor" && computerChoice === "paper") {
-            humanScore++;
-            console.log(`You win! Scissor beats paper! Score: Human ${humanScore} x Computer ${computerScore}!`);
-        } else if (humanChoice.toLowerCase() === computerChoice) {
-            console.log(`It's a draw! Score: Human ${humanScore} x Computer ${computerScore}!`);
-        };
-    }
-    playRound(getHumanChoice(), getComputerChoice());
 }
+
+// Declare the players score variables 
+let humanScore = 0;
+let computerScore = 0;
+
+// Create display variable
+let display = document.getElementById('result');
+
+// Create buttons variable
+let rockBtn = document.getElementById('rock');
+let paperBtn = document.getElementById('paper');
+let scissorBtn = document.getElementById('scissor');
+
+// Add event listener to the buttons variable
+rockBtn.addEventListener('click', e => {
+    e.preventDefault;
+    computerChoice = getComputerChoice();
+    console.log(computerChoice);
+    if (computerChoice === "scissor") {
+        humanScore++;
+        if (humanScore === 5) {
+            display.textContent = `Congratulations, ${e.target.id} beats ${computerChoice}. You won the game!`;
+            humanScore = 0;
+            computerScore = 0;
+        } else {
+            display.textContent = `You win! Rock beats scissor! Score: Human ${humanScore} x Computer ${computerScore}!`;
+        }
+    } else if (computerChoice === "paper") {
+        computerScore++;
+        if (computerScore === 5) {
+            display.textContent = `Sorry, ${computerChoice} beats ${e.target.id}. You lost the game!`
+            humanScore = 0;
+            computerScore = 0;
+        } else {
+            display.textContent = `You lose! Paper beats rock! Score: Human ${humanScore} x Computer ${computerScore}!`;
+        }
+    } else {
+        display.textContent = `It's a draw! Score: Human ${humanScore} x Computer ${computerScore}!`;
+    }
+});
+
+paperBtn.addEventListener('click', e => {
+    e.preventDefault;
+    computerChoice = getComputerChoice();
+    console.log(computerChoice);
+    if (computerChoice === "scissor") {
+        computerScore++;
+        if (computerScore === 5) {
+            display.textContent = `Sorry, ${computerChoice} beats ${e.target.id}. You lost the game!`
+            humanScore = 0;
+            computerScore = 0;
+        } else {
+            display.textContent = `You lose! Scissor beats paper! Score: Human ${humanScore} x Computer ${computerScore}!`;
+        }
+    } else if (computerChoice === "rock") {
+        humanScore++;
+        if (humanScore === 5) {
+            display.textContent = `Congratulations, ${e.target.id} beats ${computerChoice}. You won the game!`;
+            humanScore = 0;
+            computerScore = 0;
+        } else {
+            display.textContent = `You win! Paper beats rock! Score: Human ${humanScore} x Computer ${computerScore}!`;
+        }
+    } else {
+        display.textContent = `It's a draw! Score: Human ${humanScore} x Computer ${computerScore}!`;
+    }
+});
+
+scissorBtn.addEventListener('click', e => {
+    e.preventDefault;
+    computerChoice = getComputerChoice();
+    console.log(computerChoice);
+    if (computerChoice === "paper") {
+        humanScore++;
+        if (humanScore === 5) {
+            display.textContent = `Congratulations, ${e.target.id} beats ${computerChoice}. You won the game!`;
+            humanScore = 0;
+            computerScore = 0;
+        } else {
+            display.textContent = `You win! Scissor beats paper! Score: Human ${humanScore} x Computer ${computerScore}!`;
+        }
+    } else if (computerChoice === "rock") {
+        computerScore++;
+        if (computerScore === 5) {
+            display.textContent = `Sorry, ${computerChoice} beats ${e.target.id}. You lost the game!`
+            humanScore = 0;
+            computerScore = 0;
+        } else {
+            display.textContent = `You lose! Rock beats scissor! Score: Human ${humanScore} x Computer ${computerScore}!`;
+        }
+    } else {
+        display.textContent = `It's a draw! Score: Human ${humanScore} x Computer ${computerScore}!`;
+    }
+});
+
+// Logic to play a single round
+// function playRound(e, computerChoice) {
+//     e.preventDefault();
     
-playGame();
+//     if (e.target.id === "rock" && computerChoice === "scissor") {
+//         humanScore++;
+//         display.innerText = `You win! Rock beats scissor! Score: Human ${humanScore} x Computer ${computerScore}!`;
+//     } else if (e.target.id === "rock" && computerChoice === "paper") {
+//         computerScore++;
+//         display.innerText = `You lose! Paper beats rock! Score: Human ${humanScore} x Computer ${computerScore}!`;
+//     } else if (e.target.id === "paper" && computerChoice === "scissor") {
+//         computerScore++;
+//         display.innerText = `You lose! Scissor beats paper! Score: Human ${humanScore} x Computer ${computerScore}!`;
+//     } else if (e.target.id === "paper" && computerChoice === "rock") {
+//         humanScore++;
+//         display.innerText = `You win! Paper beats rock! Score: Human ${humanScore} x Computer ${computerScore}!`;
+//     } else if (e.target.id === "scissor" && computerChoice === "rock") {
+//         computerScore++;
+//         display.innerText = `You lose! Rock beats scissor! Score: Human ${humanScore} x Computer ${computerScore}!`;
+//     } else if (e.target.id === "scissor" && computerChoice === "paper") {
+//         humanScore++;
+//         display.innerText = `You win! Scissor beats paper! Score: Human ${humanScore} x Computer ${computerScore}!`;
+//     } else if (e.target.id === computerChoice) {
+//         display.innerText = `It's a draw! Score: Human ${humanScore} x Computer ${computerScore}!`;
+//     };
+// }
