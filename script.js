@@ -14,13 +14,19 @@ function playGame() {
     }
 
     // Logic to get the human choice
-    function getHumanChoice() {
-        return prompt("Choose rock/paper/scissor: ");
-    }
+    // function getHumanChoice() {
+    //     return prompt("Choose rock/paper/scissor: ");
+    // }
 
     // Declare the players score variables 
     let humanScore = 0;
     let computerScore = 0;
+
+    // Create button variable
+    let btn = document.querySelector('.btn');
+
+    // Add event listener to the button variable
+    btn.addEventListener('click', playRound);
 
     // Logic to play a single round
     function playRound(humanChoice, computerChoice) {
@@ -46,10 +52,6 @@ function playGame() {
             console.log(`It's a draw! Score: Human ${humanScore} x Computer ${computerScore}!`);
         };
     }
-    playRound(getHumanChoice(), getComputerChoice());
-    playRound(getHumanChoice(), getComputerChoice());
-    playRound(getHumanChoice(), getComputerChoice());
-    playRound(getHumanChoice(), getComputerChoice());
     playRound(getHumanChoice(), getComputerChoice());
 }
     
