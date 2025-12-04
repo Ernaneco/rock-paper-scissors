@@ -22,12 +22,16 @@ let rockBtn = document.getElementById('rock');
 let paperBtn = document.getElementById('paper');
 let scissorBtn = document.getElementById('scissor');
 
-// Add event listener to the buttons variable
-rockBtn.addEventListener('click', e => {
+// Add event listener to the buttons
+rockBtn.addEventListener('click', playGame);
+paperBtn.addEventListener('click', playGame);
+scissorBtn.addEventListener('click', playGame);
+
+function playGame(e) {
     e.preventDefault;
     computerChoice = getComputerChoice();
     console.log(computerChoice);
-    if (computerChoice === "scissor") {
+    if (e.target.id === "rock" && computerChoice === "scissor") {
         humanScore++;
         if (humanScore === 5) {
             display.textContent = `Congratulations, ${e.target.id} beats ${computerChoice}. You won the game!`;
@@ -36,7 +40,7 @@ rockBtn.addEventListener('click', e => {
         } else {
             display.textContent = `You win! Rock beats scissor! Score: Human ${humanScore} x Computer ${computerScore}!`;
         }
-    } else if (computerChoice === "paper") {
+    } else if (e.target.id === "rock" && computerChoice === "paper") {
         computerScore++;
         if (computerScore === 5) {
             display.textContent = `Sorry, ${computerChoice} beats ${e.target.id}. You lost the game!`
@@ -45,16 +49,7 @@ rockBtn.addEventListener('click', e => {
         } else {
             display.textContent = `You lose! Paper beats rock! Score: Human ${humanScore} x Computer ${computerScore}!`;
         }
-    } else {
-        display.textContent = `It's a draw! Score: Human ${humanScore} x Computer ${computerScore}!`;
-    }
-});
-
-paperBtn.addEventListener('click', e => {
-    e.preventDefault;
-    computerChoice = getComputerChoice();
-    console.log(computerChoice);
-    if (computerChoice === "scissor") {
+    } else if (e.target.id === "paper" && computerChoice === "scissor") {
         computerScore++;
         if (computerScore === 5) {
             display.textContent = `Sorry, ${computerChoice} beats ${e.target.id}. You lost the game!`
@@ -63,7 +58,7 @@ paperBtn.addEventListener('click', e => {
         } else {
             display.textContent = `You lose! Scissor beats paper! Score: Human ${humanScore} x Computer ${computerScore}!`;
         }
-    } else if (computerChoice === "rock") {
+    } else if (e.target.id === "paper" && computerChoice === "rock") {
         humanScore++;
         if (humanScore === 5) {
             display.textContent = `Congratulations, ${e.target.id} beats ${computerChoice}. You won the game!`;
@@ -72,16 +67,7 @@ paperBtn.addEventListener('click', e => {
         } else {
             display.textContent = `You win! Paper beats rock! Score: Human ${humanScore} x Computer ${computerScore}!`;
         }
-    } else {
-        display.textContent = `It's a draw! Score: Human ${humanScore} x Computer ${computerScore}!`;
-    }
-});
-
-scissorBtn.addEventListener('click', e => {
-    e.preventDefault;
-    computerChoice = getComputerChoice();
-    console.log(computerChoice);
-    if (computerChoice === "paper") {
+    } else if (e.target.id === "scissor" && computerChoice === "paper") {
         humanScore++;
         if (humanScore === 5) {
             display.textContent = `Congratulations, ${e.target.id} beats ${computerChoice}. You won the game!`;
@@ -90,7 +76,7 @@ scissorBtn.addEventListener('click', e => {
         } else {
             display.textContent = `You win! Scissor beats paper! Score: Human ${humanScore} x Computer ${computerScore}!`;
         }
-    } else if (computerChoice === "rock") {
+    } else if (e.target.id === "scissor" && computerChoice === "rock") {
         computerScore++;
         if (computerScore === 5) {
             display.textContent = `Sorry, ${computerChoice} beats ${e.target.id}. You lost the game!`
@@ -102,31 +88,86 @@ scissorBtn.addEventListener('click', e => {
     } else {
         display.textContent = `It's a draw! Score: Human ${humanScore} x Computer ${computerScore}!`;
     }
-});
+}
 
-// Logic to play a single round
-// function playRound(e, computerChoice) {
-//     e.preventDefault();
-    
-//     if (e.target.id === "rock" && computerChoice === "scissor") {
+// Alternative method
+// rockBtn.addEventListener('click', e => {
+//     e.preventDefault;
+//     computerChoice = getComputerChoice();
+//     console.log(computerChoice);
+//     if (computerChoice === "scissor") {
 //         humanScore++;
-//         display.innerText = `You win! Rock beats scissor! Score: Human ${humanScore} x Computer ${computerScore}!`;
-//     } else if (e.target.id === "rock" && computerChoice === "paper") {
+//         if (humanScore === 5) {
+//             display.textContent = `Congratulations, ${e.target.id} beats ${computerChoice}. You won the game!`;
+//             humanScore = 0;
+//             computerScore = 0;
+//         } else {
+//             display.textContent = `You win! Rock beats scissor! Score: Human ${humanScore} x Computer ${computerScore}!`;
+//         }
+//     } else if (computerChoice === "paper") {
 //         computerScore++;
-//         display.innerText = `You lose! Paper beats rock! Score: Human ${humanScore} x Computer ${computerScore}!`;
-//     } else if (e.target.id === "paper" && computerChoice === "scissor") {
+//         if (computerScore === 5) {
+//             display.textContent = `Sorry, ${computerChoice} beats ${e.target.id}. You lost the game!`
+//             humanScore = 0;
+//             computerScore = 0;
+//         } else {
+//             display.textContent = `You lose! Paper beats rock! Score: Human ${humanScore} x Computer ${computerScore}!`;
+//         }
+//     } else {
+//         display.textContent = `It's a draw! Score: Human ${humanScore} x Computer ${computerScore}!`;
+//     }
+// });
+
+// paperBtn.addEventListener('click', e => {
+//     e.preventDefault;
+//     computerChoice = getComputerChoice();
+//     console.log(computerChoice);
+//     if (computerChoice === "scissor") {
 //         computerScore++;
-//         display.innerText = `You lose! Scissor beats paper! Score: Human ${humanScore} x Computer ${computerScore}!`;
-//     } else if (e.target.id === "paper" && computerChoice === "rock") {
+//         if (computerScore === 5) {
+//             display.textContent = `Sorry, ${computerChoice} beats ${e.target.id}. You lost the game!`
+//             humanScore = 0;
+//             computerScore = 0;
+//         } else {
+//             display.textContent = `You lose! Scissor beats paper! Score: Human ${humanScore} x Computer ${computerScore}!`;
+//         }
+//     } else if (computerChoice === "rock") {
 //         humanScore++;
-//         display.innerText = `You win! Paper beats rock! Score: Human ${humanScore} x Computer ${computerScore}!`;
-//     } else if (e.target.id === "scissor" && computerChoice === "rock") {
-//         computerScore++;
-//         display.innerText = `You lose! Rock beats scissor! Score: Human ${humanScore} x Computer ${computerScore}!`;
-//     } else if (e.target.id === "scissor" && computerChoice === "paper") {
+//         if (humanScore === 5) {
+//             display.textContent = `Congratulations, ${e.target.id} beats ${computerChoice}. You won the game!`;
+//             humanScore = 0;
+//             computerScore = 0;
+//         } else {
+//             display.textContent = `You win! Paper beats rock! Score: Human ${humanScore} x Computer ${computerScore}!`;
+//         }
+//     } else {
+//         display.textContent = `It's a draw! Score: Human ${humanScore} x Computer ${computerScore}!`;
+//     }
+// });
+
+// scissorBtn.addEventListener('click', e => {
+//     e.preventDefault;
+//     computerChoice = getComputerChoice();
+//     console.log(computerChoice);
+//     if (computerChoice === "paper") {
 //         humanScore++;
-//         display.innerText = `You win! Scissor beats paper! Score: Human ${humanScore} x Computer ${computerScore}!`;
-//     } else if (e.target.id === computerChoice) {
-//         display.innerText = `It's a draw! Score: Human ${humanScore} x Computer ${computerScore}!`;
-//     };
-// }
+//         if (humanScore === 5) {
+//             display.textContent = `Congratulations, ${e.target.id} beats ${computerChoice}. You won the game!`;
+//             humanScore = 0;
+//             computerScore = 0;
+//         } else {
+//             display.textContent = `You win! Scissor beats paper! Score: Human ${humanScore} x Computer ${computerScore}!`;
+//         }
+//     } else if (computerChoice === "rock") {
+//         computerScore++;
+//         if (computerScore === 5) {
+//             display.textContent = `Sorry, ${computerChoice} beats ${e.target.id}. You lost the game!`
+//             humanScore = 0;
+//             computerScore = 0;
+//         } else {
+//             display.textContent = `You lose! Rock beats scissor! Score: Human ${humanScore} x Computer ${computerScore}!`;
+//         }
+//     } else {
+//         display.textContent = `It's a draw! Score: Human ${humanScore} x Computer ${computerScore}!`;
+//     }
+// });
